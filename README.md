@@ -24,3 +24,7 @@ HoughCNN_Exec [options] -i input_file.ply -o output_file.ply
 # Author webpage
 
 [Alexandre Boulch](https://sites.google.com/site/boulchalexandre)
+
+# Previous version
+
+Previous version of the code are located in folders cgal/ and pcl/
