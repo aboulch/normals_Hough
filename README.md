@@ -20,3 +20,7 @@ Boost: argument parsing (main.cpp)
 # Usage
 
 HoughCNN_Exec [options] -i input_file.ply -o output_file.ply
+
+# Author webpage
+
+[Alexandre Boulch](https://sites.google.com/site/boulchalexandre)
