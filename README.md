@@ -15,8 +15,6 @@ Eigen and nanoflann (assumed to be in the source folder)
 
 PCL: ply read only (main.cpp)
 
-Boost: argument parsing (main.cpp)
-
 # Usage
 
 HoughCNN_Exec [options] -i input_file.ply -o output_file.ply
