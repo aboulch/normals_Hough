@@ -28,19 +28,10 @@ if(UNIX)
 	set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 endif(UNIX)
 
-#############################
-## BOOST
-#############################
-FIND_PACKAGE( Boost 1.40 COMPONENTS program_options REQUIRED )
-INCLUDE_DIRECTORIES( ${Boost_INCLUDE_DIR} )
 
-
-
-add_executable(Hough_Exec 
+add_executable(Hough_Exec
 main.cpp
 Normals.h
 pc_io.cpp
 pc_io.h)
 target_link_libraries(Hough_Exec ${EXTRA_LIBS} ${Boost_LIBRARIES} ${PCL_LIBRARIES} ${PROJECT_LINK_LIB} )
-
-
