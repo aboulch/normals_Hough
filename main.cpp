@@ -53,7 +53,7 @@ int main(int argc, char** argv){
     try{
 
         string input = "-1";
-        string output = "out.ply";
+        string output = "out.xyz";
         int K = 100;
         int T = 1000;
         int n_phi=15;
@@ -131,8 +131,8 @@ int main(int argc, char** argv){
         }
 
         // load the point cloud
-        Eigen::MatrixX3d pc, normals_gt, normals;
-        ply_load(input,pc, normals_gt);
+        Eigen::MatrixX3d pc, normals;
+        pc_load(input,pc);
 
         cout << "Create estimator" << endl;
         Eigen_Normal_Estimator ne(pc,normals);
@@ -149,7 +149,7 @@ int main(int argc, char** argv){
 
         cout << "Save" << endl;
         // save the point cloud
-        ply_save(output,pc, normals);
+        pc_save(output,pc, normals);
 
     }catch(std::exception& e){
         std::cerr << "Unhandled Exception reached the top of main: "

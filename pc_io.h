@@ -35,61 +35,13 @@
 #ifndef PC_IO_HEADER
 #define PC_IO_HEADER
 
-#include<string>
-#include"Eigen/Dense"
-#include<vector>
-#include<fstream>
-#include<iostream>
 
-void off_save(const std::string& filename, const Eigen::MatrixX3d& pc, const std::vector<std::vector<uint> >& faces=std::vector<std::vector<uint> >());
 
-template<typename T>
-void off_load(const std::string& filename, typename Eigen::Matrix<T, Eigen::Dynamic, 3>& pc, std::vector<std::vector<uint> >& faces){
-	std::ifstream ifs(filename.c_str());
 
-	if(!ifs.is_open()){
-		std::cout << "OFF load: Error opening file" << std::endl;
-		return;
-	}
+#include <string>
+#include "Eigen/Dense"
 
-	std::string s_tmp;
-	ifs >> s_tmp;
-
-	if(s_tmp != "OFF"){
-		std::cout << "OFF: format problem"<<std::endl;
-		std::cout << s_tmp << std::endl;
-		return;
-	}
-
-	int vertex_nbr;
-	int faces_nbr;
-	int edges_nbr;
-
-	ifs >> vertex_nbr >> faces_nbr >> edges_nbr;
-
-	pc.resize(vertex_nbr, 3);
-	faces.resize(faces_nbr);
-	for(int i=0; i<vertex_nbr; i++){
-		ifs >> pc(i,0) >> pc(i,1) >> pc(i,2);
-	}
-	for(int i=0; i<faces_nbr; i++){
-		int element_nbr;
-		ifs >> element_nbr;
-		faces[i].resize(element_nbr);
-		for(int j=0; j<element_nbr; j++)
-			ifs >> faces[i][j];
-	}
-}
-
-void ply_load(const std::string& filename,
-        Eigen::MatrixX3d& pc, Eigen::MatrixX3d& normals);
-
-void ply_save(const std::string& filename, const Eigen::MatrixX3d& pc,const Eigen::VectorXi& labels);
-
-void ply_save(const std::string& filename, const Eigen::MatrixX3d& pc,const Eigen::MatrixX3d& normals);
-
-void ply_save(const std::string& filename, const Eigen::MatrixX3d& pc,const Eigen::MatrixX3i& colors);
-
-void ply_save(const std::string& filename, const Eigen::MatrixX3d& pc, const Eigen::MatrixX3d& normals,const Eigen::MatrixX3i& colors);
+void pc_load(const std::string& filename,Eigen::MatrixX3d& pc);
+void pc_save(const std::string& filename,const Eigen::MatrixX3d& pc, const Eigen::MatrixX3d& normals);
 
 #endif
