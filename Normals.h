@@ -46,9 +46,11 @@
 #include "Eigen/Dense"
 #include "nanoflann.hpp"
 
+#ifdef _OPENMP
 #include <omp.h>
 
 #define USE_OPENMP_FOR_NORMEST
+#endif
 
 class Eigen_Normal_Estimator{
 
