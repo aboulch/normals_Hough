@@ -19,7 +19,7 @@ HoughCNN_Exec [options] -i input_file.xyz -o output_file.xyz
 
 # Author webpage
 
-[Alexandre Boulch](https://sites.google.com/site/boulchalexandre)
+[Alexandre Boulch](https://sites.google.com/view/boulch)
 
 # Previous version
 
