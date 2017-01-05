@@ -1,24 +1,24 @@
 /* License Information
  *
  *  Copyright (C) 2013 Boulch Alexandre, Ecole Nationale des Ponts et Chaussees
- *  Permission is hereby granted, free of charge, to any person obtaining a copy of this 
- *  software and associated documentation files (the "Software"), to deal in the Software 
+ *  Permission is hereby granted, free of charge, to any person obtaining a copy of this
+ *  software and associated documentation files (the "Software"), to deal in the Software
  *  without restriction, including without limitation the rights to use, copy, modify, merge,
- *  publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons 
+ *  publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
  *  to whom the Software is furnished to do so, subject to the following conditions:
- *  
+ *
  *  The above copyright notice and this permission notice shall be included in all copies or
  *  substantial portions of the Software.
  *
- *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
- *  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR 
- *  PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE 
- *  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, 
- *  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE 
+ *  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ *  INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ *  PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+ *  LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+ *  TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
  *  OR OTHER DEALINGS IN THE SOFTWARE.
  *
  *  Note that this library relies on external libraries subject to their own license.
- *  To use this software, you are subject to the dependencies license, these licenses 
+ *  To use this software, you are subject to the dependencies license, these licenses
  *  applies to the dependency ONLY  and NOT this code.
  *  Please refer below to the web sites for license informations.
  *
@@ -39,7 +39,7 @@
 #include <omp.h>
 #endif
 
-#include <iostream>	
+#include <iostream>
 #include <time.h>
 #include <vector>
 #include <set>
@@ -683,7 +683,7 @@ private:
 	 * @param points - table of random points in the unit ball
 	 * @param vecInt - table of random integers
 	 */
-	inline void generate_list_of_triplets(std::vector<Eigen::Vector3i> &triplets, 
+	inline void generate_list_of_triplets(std::vector<Eigen::Vector3i> &triplets,
 			int plane_number, float radius1,
 			float radius2,pcl::KdTreeFLANN<Point> &tree,
 			Point & pt,
@@ -1024,9 +1024,9 @@ private:
 			permutation[j] = temp;
 		}
 
-#if defined(_OPENMP) && defined(USE_OPENMP_FOR_NORMEST)
-#pragma omp parallel for schedule(guided)
-#endif
+		#if defined(_OPENMP) && defined(USE_OPENMP_FOR_NORMEST)
+		#pragma omp parallel for schedule(guided)
+		#endif
 		for(int per=0; per<(int)pts->size(); per++){
 
 			int n = permutation[per];
@@ -1133,9 +1133,9 @@ private:
 			permutation[j] = temp;
 		}
 
-#if defined(_OPENMP) && defined(USE_OPENMP_FOR_NORMEST)
-#pragma omp parallel for schedule(guided)
-#endif
+		#if defined(_OPENMP) && defined(USE_OPENMP_FOR_NORMEST)
+		#pragma omp parallel for schedule(guided)
+		#endif
 		for(int per=0; per<(int)pts->size(); per++){
 
 			int n = permutation[per];
@@ -1260,9 +1260,9 @@ private:
 			permutation[j] = temp;
 		}
 
-#if defined(_OPENMP) && defined(USE_OPENMP_FOR_NORMEST)
-#pragma omp parallel for schedule(guided)
-#endif
+		#if defined(_OPENMP) && defined(USE_OPENMP_FOR_NORMEST)
+		#pragma omp parallel for schedule(guided)
+		#endif
 		for(int per=0; per<(int)pts->size(); per++){
 
 			int n = permutation[per];
@@ -1395,9 +1395,9 @@ private:
 			permutation[j] = temp;
 		}
 
-#if defined(_OPENMP) && defined(USE_OPENMP_FOR_NORMEST)
-#pragma omp parallel for schedule(guided)
-#endif
+		#if defined(_OPENMP) && defined(USE_OPENMP_FOR_NORMEST)
+		#pragma omp parallel for schedule(guided)
+		#endif
 		for(int per=0; per<(int)pts->size(); per++){
 
 			int n = permutation[per];
@@ -1425,6 +1425,7 @@ private:
 					}
 				}
 			}
+			radius2 = srqt(radius2);
 			float s_radius = radius2 / small_radius_factor;
 
 			//point cloud of neighbors and kdtree creation
@@ -1546,9 +1547,9 @@ private:
 			permutation[j] = temp;
 		}
 
-#if defined(_OPENMP) && defined(USE_OPENMP_FOR_NORMEST)
-#pragma omp parallel for schedule(guided)
-#endif
+		#if defined(_OPENMP) && defined(USE_OPENMP_FOR_NORMEST)
+		#pragma omp parallel for schedule(guided)
+		#endif
 		for(int per=0; per<(int)pts->size(); per++){
 
 			int n = permutation[per];
@@ -1666,9 +1667,9 @@ private:
 			permutation[j] = temp;
 		}
 
-#if defined(_OPENMP) && defined(USE_OPENMP_FOR_NORMEST)
-#pragma omp parallel for schedule(guided)
-#endif
+		#if defined(_OPENMP) && defined(USE_OPENMP_FOR_NORMEST)
+		#pragma omp parallel for schedule(guided)
+		#endif
 		for(int per=0; per<(int)pts->size(); per++){
 
 			int n = permutation[per];
@@ -1695,6 +1696,7 @@ private:
 					}
 				}
 			}
+			radius2 = sqrt(radius2);
 
 			std::vector<int>* cubes = new std::vector<int>[n_cubes*n_cubes*n_cubes];
 			unsigned int points_size = (unsigned int) pointIdxRadiusSearch.size();
