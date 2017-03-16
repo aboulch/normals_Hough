@@ -1085,7 +1085,7 @@ private:
 
 
 		//resizing the normal point cloud
-		if(nls != pts){
+		if(nls->size() != pts->size()){
 			nls->resize(pts->size());
 		}
 
@@ -1208,7 +1208,7 @@ private:
 	void unif_knn(int neighbor_number){
 
 		//resizing the normal point cloud
-		if(nls != pts){
+		if(nls->size() != pts->size()){
 			nls->resize(pts->size());
 		}
 
@@ -1344,7 +1344,7 @@ private:
 	void unif_radius(float radius){
 
 		//resizing the normal point cloud
-		if(nls != pts){
+		if(nls->size() != pts->size()){
 			nls->resize(pts->size());
 		}
 
@@ -1425,7 +1425,7 @@ private:
 					}
 				}
 			}
-			radius2 = srqt(radius2);
+			radius2 = std::sqrt(radius2);
 			float s_radius = radius2 / small_radius_factor;
 
 			//point cloud of neighbors and kdtree creation
@@ -1494,7 +1494,7 @@ private:
 
 
 		//resizing the normal point cloud
-		if(nls != pts){
+		if(nls->size() != pts->size()){
 			nls->resize(pts->size());
 		}
 
@@ -1613,7 +1613,7 @@ private:
 	{
 
 		//resizing the normal point cloud
-		if(nls != pts){
+		if(nls->size() != pts->size()){
 			nls->resize(pts->size());
 		}
 
