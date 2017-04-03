@@ -1,4 +1,5 @@
 nanoflann.hpp
-Eigen/*
+Eigen/
 build/*
 *~
+*.so

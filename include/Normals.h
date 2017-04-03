@@ -39,6 +39,8 @@
 
 #include <vector>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <ctime>
 #include <math.h>
 #include <string>
@@ -54,10 +56,10 @@
 
 class Eigen_Normal_Estimator{
 
-private:
+protected:
 
-	const Eigen::MatrixX3d& pts;/*!< Point cloud*/
-	Eigen::MatrixX3d& nls;/*!< Normal cloud*/
+	Eigen::MatrixX3d pts;/*!< Point cloud*/
+	Eigen::MatrixX3d nls;/*!< Normal cloud*/
 	std::vector<double> densities; /*!< vector of the densities*/
 
 	////  PARAMETERS  ////
@@ -73,25 +75,32 @@ private:
 public:
 
 	//accessor
-	const Eigen::MatrixX3d& get_points()const {return pts;}
+	Eigen::MatrixX3d& get_points(){return pts;}
+	const Eigen::MatrixX3d get_points()const {return pts;}
 
 	Eigen::MatrixX3d& get_normals(){return nls;}
-	int& get_T(){return n_planes;}
-	int& get_n_phi(){return n_phi;}
-	int& get_n_rot(){return n_rot;}
-	int& get_K(){return neighborhood_size;}
-	bool& density_sensitive(){return use_density;}
-	double& get_tol_angle_rad(){return tol_angle_rad;}
-	unsigned int& get_K_density(){return k_density;}
+	const Eigen::MatrixX3d& get_normals() const {return nls;}
 
-	const Eigen::MatrixX3d& get_normals()const {return nls;}
 	const int& get_T() const {return n_planes;}
+	void set_T(int T){n_planes=T;}
+
 	const int& get_n_phi() const {return n_phi;}
+	void set_n_phi(int nphi){n_phi=nphi;}
+
 	const int& get_n_rot() const {return n_rot;}
+	void set_n_rot(int nrot){n_rot=nrot;}
+
 	const int& get_K() const {return neighborhood_size;}
-	const bool& density_sensitive() const {return use_density;}
+	void set_K(int K){neighborhood_size=K;}
+
+	const bool& get_density_sensitive() const {return use_density;}
+	void set_density_sensitive(bool density_sensitive){use_density=density_sensitive;}
+
 	const double& get_tol_angle_rad() const {return tol_angle_rad;}
+	void set_tol_angle_rad(float alpha){tol_angle_rad=alpha;}
+
 	const unsigned int& get_K_density() const {return k_density;}
+	void set_K_density(int K_d){k_density=K_d;}
 
 	////  TYPE DEFINITIONS  ////
 
@@ -109,6 +118,49 @@ public:
 			use_density = false;
 			k_density = 5;
 	}
+	Eigen_Normal_Estimator(){
+			n_planes=700;
+			n_rot=5;
+			n_phi=15;
+			tol_angle_rad=0.79;
+			neighborhood_size = 200;
+			use_density = false;
+			k_density = 5;
+	}
+
+	// io
+	void loadXYZ(const std::string& filename){
+		std::ifstream istr(filename.c_str());
+		std::vector<Eigen::Vector3d> points;
+	    std::string line;
+		double x,y,z;
+	    while(getline(istr, line))
+	    {
+			std::stringstream sstr("");
+			sstr << line;
+			sstr >> x >> y >> z;
+			points.push_back(Eigen::Vector3d(x,y,z));
+	    }
+		istr.close();
+		pts.resize(points.size(),3);
+		for(int i=0; i<points.size(); i++){
+			pts.row(i) = points[i];
+		}
+	}
+
+	void saveXYZ(const std::string& filename){
+		std::ofstream ofs(filename.c_str());
+		for(int i=0; i<pts.rows(); i++){
+			ofs << pts(i,0) << " ";
+			ofs << pts(i,1) << " ";
+			ofs << pts(i,2) << " ";
+			ofs << nls(i,0) << " ";
+			ofs << nls(i,1) << " ";
+			ofs << nls(i,2) << std::endl;
+		}
+		ofs.close();
+	}
+
 
 	void estimate_normals()
 	{
@@ -248,7 +300,7 @@ public:
 
 	}
 
-private:
+protected:
 
 	// PRIVATE METHODS
 

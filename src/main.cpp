@@ -32,7 +32,6 @@
  */
 
 #include "Normals.h"
-#include "pc_io.h"
 
 #include <boost/program_options.hpp>
 
@@ -131,25 +130,25 @@ int main(int argc, char** argv){
         }
 
         // load the point cloud
-        Eigen::MatrixX3d pc, normals;
-        pc_load(input,pc);
 
         cout << "Create estimator" << endl;
+        Eigen::MatrixX3d pc, normals;
         Eigen_Normal_Estimator ne(pc,normals);
-        ne.get_K()=K;
-        ne.get_T()=T;
-        ne.density_sensitive()=ua;
-    	ne.get_n_phi() = n_phi;
-    	ne.get_n_rot() = n_rot;
-    	ne.get_tol_angle_rad() = tol_angle_rad;
-    	ne.get_K_density()= k_density;
+        ne.loadXYZ(input);
+        ne.set_K(K);
+        ne.set_T(T);
+        ne.set_density_sensitive(ua);
+    	ne.set_n_phi(n_phi);
+    	ne.set_n_rot(n_rot);
+    	ne.set_tol_angle_rad(tol_angle_rad);
+    	ne.set_K_density(k_density);
 
         cout << "Estimate" << endl;
         ne.estimate_normals();
 
         cout << "Save" << endl;
         // save the point cloud
-        pc_save(output,pc, normals);
+        ne.saveXYZ(output);
 
     }catch(std::exception& e){
         std::cerr << "Unhandled Exception reached the top of main: "
