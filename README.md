@@ -15,11 +15,16 @@ The current version Normals.h relies on Eigen and nanoflann (assumed to be in th
 
 # Usage
 
-HoughCNN_Exec [options] -i input_file.xyz -o output_file.xyz
+Hough_Exec [options] -i input_file.xyz -o output_file.xyz
 
 # Author webpage
 
 [Alexandre Boulch](https://sites.google.com/view/boulch)
+
+# License
+
+The code is released under a GPLv3 license. For commercial purposes contact the authors.
+The detailed licence is [here](LICENSE.md).
 
 # Previous version
 

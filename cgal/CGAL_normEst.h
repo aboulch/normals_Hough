@@ -1,29 +1,30 @@
-/* License Information
- *
- * Copyright (C) 2012 Boulch Alexandre, Ecole Nationale des Ponts et Chaussees -
- * Ecole des Ponts ParisTech
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- *
- * Note that this library relies on external libraries subject to their own license.
- * To use this software, you are subject to the dependencies license, these licenses applies to the dependency
- * ONLY  and NOT this code.
- * Please refer below to the web sites for license informations.
- *
- * OPENMP (http://openmp.org/)
- * CGAL (http://www.cgal.org/) see CGAL Licence Term
- */
+// Deep Learning for Robust Normal Estimation in Unstructured Point Clouds
+// Copyright (c) 2016 Alexande Boulch and Renaud Marlet
+//
+// This program is free software; you can redistribute it and/or modify it under the terms
+// of the GNU General Public License as published by the Free Software Foundation;
+// either version 3 of the License, or any later version.
+// This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
+// without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+// See the GNU General Public License for more details. You should have received a copy of
+// the GNU General Public License along with this program; if not, write to the Free Software
+// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301  USA
+//
+// PLEASE ACKNOWLEDGE THE AUTHORS AND PUBLICATION:
+// "Deep Learning for Robust Normal Estimation in Unstructured Point Clouds "
+// by Alexandre Boulch and Renaud Marlet, Symposium of Geometry Processing 2016,
+// Computer Graphics Forum
+//
+// The full license can be retrieved at https://www.gnu.org/licenses/gpl-3.0.en.html
+//
+// Note that this library relies on external libraries subject to their own license.
+// To use this software, you are subject to the dependencies license, these licenses applies to the dependency
+// ONLY  and NOT this code.
+// Please refer below to the web sites for license informations.
+//
+// OPENMP (http://openmp.org/)
+// CGAL (http://www.cgal.org/) see CGAL Licence Term
+//
 
 #ifndef NORM_EST_CGAL_OMP_H
 #define NORM_EST_CGAL_OMP_H
@@ -42,7 +43,7 @@
 #include <CGAL/Search_traits_3.h>
 #include <CGAL/Fuzzy_sphere.h>
 
-#include <iostream>	
+#include <iostream>
 #include <time.h>
 #include <vector>
 #include <map>
