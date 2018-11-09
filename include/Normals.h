@@ -200,7 +200,7 @@ public:
 
 		//kd tree creation
 		//build de kd_tree
-		kd_tree tree(3, pts, 10 /* max leaf */ );
+		kd_tree tree(pts);
 		tree.index->buildIndex();
 
 		//create the density estimation for each point

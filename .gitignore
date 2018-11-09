@@ -1,5 +1,6 @@
-nanoflann.hpp
-Eigen/
 build/*
+python/build/*
+python/lib/*
+test_cpp/build/*
 *~
 *.so

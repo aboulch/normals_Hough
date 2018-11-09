@@ -10,8 +10,8 @@ Please acknowledge our the reference paper :
 
 # Code
 
-The code for normal estimation is C++ hearder only. Three version are proposed, previous version are located in cgal/ en pcl/ relies on CGAL and PCL libriaries.
-The current version Normals.h relies on Eigen and nanoflann (assumed to be in the source folder when compiling).
+The code for normal estimation is C++ hearder only. Three version are proposed, previous version are located in ```archives/cgal/``` and ```archives/pcl/``` relies on CGAL and PCL libriaries.
+The current version Normals.h relies on Eigen and nanoflann (we provide them in the ```third_party_includes``` folder).
 
 # Parameters
 
@@ -22,19 +22,45 @@ The current version Normals.h relies on Eigen and nanoflann (assumed to be in th
 * `tol_angle_rad (default 0.79)` the maximal angle used for normal cluster (final normal decision).
 * `k_density (defautl 5)` the neighborhood size for density computation.
 
-# Usage
+# Examples and tests
+
+## Python
+
+Using the library with Python requires building the wrapper.
+All python code has been built and tested under Unbuntu 18.04 and Anaconda.
+
+### Building the wrapper
+```
+cd python
+python setup.py install --home="."
+```
+
+### Python test
+From the root directory:
+```
+cd test_python
+python example.py
+```
+The script creates a point cloud on a cube and estimate the normals.
+It produces a ```.xyz``` containing both points and normals, it can be displayed using Meshlab or CloudCompare.
+
+## C++
+
+In the folder ```test_cpp```, the executable can be generated using CMake.
+
+### Usage
 
 Hough_Exec [options] -i input_file.xyz -o output_file.xyz
 
 # Author webpage
 
-[Alexandre Boulch](https://sites.google.com/view/boulch)
+[Alexandre Boulch](www.boulch.eu)
 
 # License
 
 The code is released under a GPLv3 license. For commercial purposes contact the authors.
 The detailed licence is [here](LICENSE.md).
 
-# Previous version
+# Previous versions
 
-Previous version of the code are located in folders cgal/ and pcl/
+Previous version of the code are located in folders ```archives/cgal/``` and ```archives/pcl/```
