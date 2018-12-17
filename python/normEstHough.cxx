@@ -69,7 +69,7 @@ void NormEstHough::get_normals(double* array, int m, int n) {
         }
     return ;
 }
-
+ 
 void NormEstHough::set_points(double* array, int m, int n){
     // resize the point cloud
     pts.resize(m,3);

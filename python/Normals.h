@@ -30,8 +30,8 @@
 #include <math.h>
 #include <string>
 #include <sstream>
-#include "Eigen/Dense"
-#include "nanoflann.hpp"
+#include <Eigen/Dense>
+#include <nanoflann.hpp>
 
 #ifdef _OPENMP
 #include <omp.h>
@@ -91,7 +91,6 @@ public:
 
 	typedef nanoflann::KDTreeEigenMatrixAdaptor< Eigen::MatrixX3d > kd_tree; //a row is a point
 
-
 	// constructor
 	Eigen_Normal_Estimator(const Eigen::MatrixX3d& points, Eigen::MatrixX3d& normals):
 		pts(points),nls(normals){
@@ -128,7 +127,7 @@ public:
 	    }
 		istr.close();
 		pts.resize(points.size(),3);
-		for(int i=0; i<points.size(); i++){
+		for(uint i=0; i<points.size(); i++){
 			pts.row(i) = points[i];
 		}
 	}
@@ -159,7 +158,7 @@ public:
 
 		//creating vector of random int
 		std::vector<int> vecInt(1000000);
-		for(int i=0; i<vecInt.size(); i++){
+		for(uint i=0; i<vecInt.size(); i++){
 			vecInt[i] = rand();
 		}
 
@@ -200,7 +199,7 @@ public:
 
 		//kd tree creation
 		//build de kd_tree
-		kd_tree tree(pts);
+		kd_tree tree(3, pts, 10);
 		tree.index->buildIndex();
 
 		//create the density estimation for each point
@@ -218,7 +217,7 @@ public:
 			//knn for k_density+1 because the point is itself include in the search tree
 			tree.index->knnSearch(&pt_query[0], k_density+1, &pointIdxSearch[0], &pointSquaredDistance[0]);
 			double d =0;
-			for(int i=0; i<pointSquaredDistance.size(); i++){
+			for(uint i=0; i<pointSquaredDistance.size(); i++){
 				d+=std::sqrt(pointSquaredDistance[i]);
 			}
 			d /= pointSquaredDistance.size()-1;
@@ -367,7 +366,7 @@ protected:
 	unsigned int dichotomic_search_nearest(const std::vector<double> elems, double d){
 		unsigned int i1 = 0;
 		unsigned int i2 = elems.size()-1;
-		unsigned int i3;
+		unsigned int i3 = (i1+i2)/2;
 		while(i2 > i1){
 			i3 = (i1+i2)/2;
 			if(elems[i3] == d){break;}
@@ -391,13 +390,13 @@ protected:
 	{
 		std::vector<double> dists;
 		double sum=0;
-		for(int i=0; i<pointIdxSearch.size(); i++){
+		for(uint i=0; i<pointIdxSearch.size(); i++){
 			sum+=densities[pointIdxSearch[i]];
 			dists.push_back(sum);
 		}
 
 		unsigned int S = vecRandInt.size();
-		unsigned int number_of_points = pointIdxSearch.size();
+		// unsigned int number_of_points = pointIdxSearch.size();
 		triplets.resize(triplet_number,3);
 		unsigned int pos=vecRandInt[0]%S;;
 		for(unsigned int i=0; i<triplet_number; i++){

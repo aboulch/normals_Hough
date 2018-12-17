@@ -4,11 +4,12 @@ from Cython.Distutils import build_ext
 
 
 ext_modules = [Extension(
-       "NormalEstimatorHough",
-       sources=["NormalEstimatorHough.pyx", "normEstHough.cxx"],
-       include_dirs=["third_party_includes/", "../include"],
-       language="c++",             # generate C++ code
-       extra_compile_args = ["-fopenmp", "-std=c++11"]
+        "NormalEstimatorHough",
+        sources=["NormalEstimatorHough.pyx", "normEstHough.cxx"],
+        include_dirs=["../third_party_includes/"],
+        language="c++",             # generate C++ code
+        extra_compile_args = ["-fopenmp", "-std=c++11"],
+        extra_link_args=['-lgomp']
   )]
 
 setup(
