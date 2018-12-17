@@ -38,7 +38,6 @@ python setup.py install --home="."
 ### Python test
 From the root directory:
 ```
-cd test_python
 python example.py
 ```
 The script creates a point cloud on a cube and estimate the normals.
