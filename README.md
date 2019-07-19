@@ -4,9 +4,11 @@ Normal Estimation in Unstructured Point Clouds with Hough transform
 
 # Paper
 
-Please acknowledge our the reference paper :
+Please acknowledge our reference paper :
 
-"Deep Learning for Robust Normal Estimation in Unstructured Point Clouds " by Alexandre Boulch and Renaud Marlet, Symposium of Geometry Processing 2016, Computer Graphics Forum
+"Fast and robust normal estimation for point clouds with sharp features" by Alexandre Boulch and Renaud Marlet, Symposium on Geometry Processing 2012 (SGP 2012) and Computer Graphics Forum
+
+
 
 # Code
 
