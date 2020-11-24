@@ -1,6 +1,6 @@
 build/*
-python/build/*
-python/lib/*
+normals_hough/build/*
 test_cpp/build/*
 *~
 *.so
+*egg*

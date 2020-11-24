@@ -33,8 +33,7 @@ All python code has been built and tested under Unbuntu 18.04 and Anaconda.
 
 ### Building the wrapper
 ```
-cd python
-python setup.py install --home="."
+pip install -ve /path/to/notmals_Hough/
 ```
 
 ### Python test

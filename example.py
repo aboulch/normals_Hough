@@ -19,7 +19,7 @@
 
 
 import numpy as np
-import python.lib.python.NormalEstimatorHough as Estimator
+import NormalEstimatorHough as Estimator
 
 ## function for cube generation
 def cube(N):
