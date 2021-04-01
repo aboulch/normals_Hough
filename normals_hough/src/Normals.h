@@ -27,6 +27,12 @@
 #include <fstream>
 #include <sstream>
 #include <ctime>
+
+// For M_PI:
+#ifdef _MSC_VER
+#define _USE_MATH_DEFINES
+#endif
+
 #include <math.h>
 #include <string>
 #include <sstream>
@@ -37,6 +43,13 @@
 #include <omp.h>
 
 #define USE_OPENMP_FOR_NORMEST
+#endif
+
+#ifdef _MSC_VER
+typedef	unsigned int		uint;
+typedef __int64 pointIdxType;
+#else
+typedef long int pointIdxType;
 #endif
 
 class Eigen_Normal_Estimator{
@@ -212,7 +225,7 @@ public:
 			int n = permutation[per];
 			//getting the list of neighbors
 			const Eigen::Vector3d& pt_query = pts.row(n);
-			std::vector<long int> pointIdxSearch(k_density+1);
+			std::vector<pointIdxType> pointIdxSearch(k_density+1);
 			std::vector<double> pointSquaredDistance(k_density+1);
 			//knn for k_density+1 because the point is itself include in the search tree
 			tree.index->knnSearch(&pt_query[0], k_density+1, &pointIdxSearch[0], &pointSquaredDistance[0]);
@@ -242,7 +255,7 @@ public:
 			int n = permutation[per];
 
 			//getting the list of neighbors
-			std::vector<long int> pointIdxSearch;
+			std::vector<pointIdxType> pointIdxSearch;
 			std::vector<double> pointSquaredDistance;
 
 			const Eigen::Vector3d& pt_query = pts.row(n);
@@ -351,7 +364,10 @@ protected:
 				triplets(i,0) = vecRandInt[pos%S]%number_of_points;
 				triplets(i,1) = vecRandInt[(pos+vecRandInt[(pos+1)%S])%S]%number_of_points;
 				triplets(i,2) = vecRandInt[(pos+vecRandInt[(pos+1+vecRandInt[(pos+2)%S])%S])%S]%number_of_points;
-				pos+=vecRandInt[(pos+3)%S]%S;
+				auto new_pos = pos + vecRandInt[(pos+3)%S]%S;
+				if (new_pos == pos)
+					new_pos = (pos+1)%S;
+				pos = new_pos;
 			}while(triplets(i,0)==triplets(i,1) || triplets(i,1)==triplets(i,2) || triplets(i,2)==triplets(i,0));
 		}
 	}
@@ -385,7 +401,7 @@ protected:
 	 */
 	inline void list_of_triplets(Eigen::MatrixX3i &triplets,
 		const unsigned int &triplet_number,
-		std::vector<long int> pointIdxSearch,
+		std::vector<pointIdxType> pointIdxSearch,
 		std::vector<int> &vecRandInt)
 	{
 		std::vector<double> dists;
